@@ -7,6 +7,10 @@ import com.crazy_writer_game.CrazyWriterGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.resizable = false;
+		config.title = "Crazy Writer Game";
+		config.width = 696;
+		config.height = 633;
 		new LwjglApplication(new CrazyWriterGame(), config);
 	}
 }
