@@ -1,9 +1,11 @@
 package screens.game_screens.game_objects;
 
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.crazy_writer_game.CrazyWriterGame;
+import screens.game_screens.Utils.GameAssets;
 import screens.game_screens.Utils.GameUtils;
 
 public class UserLetter {
@@ -44,6 +46,12 @@ public class UserLetter {
     public void draw(CrazyWriterGame game) {
         float x = (position.x-PADDING_TOP)*100;
         float y = (position.y+PADDING_LEFT)*100;
+
+        Sprite keyBd = GameAssets.keyBg;
+        keyBd.setPosition(position.x*100-12, position.y*100-12);
+        keyBd.setSize(25, 26);
+
+        keyBd.draw(game.batch);
         game.font.draw(game.batch, Character.toString(letter), x, y);
     }
 

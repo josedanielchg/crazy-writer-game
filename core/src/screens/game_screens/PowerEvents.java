@@ -33,22 +33,24 @@ public class PowerEvents {
                 }
             }
         }
+        game.powersQueue--;
         FIRE_POWER_ACTIVATED = false;
     }
 
     public void icePowerActivate(float delta) {
 
-        if(timeIceActivated == 0 && ICE_POWER_ACTIVATED) {
+        if(ICE_POWER_ACTIVATED && timeIceActivated ==0)
+            game.powersQueue--;
+
+        if(ICE_POWER_ACTIVATED) {
+            timeIceActivated += delta;
             world.setGravity(new Vector2(0,0));
             game.GENERATION_WORDS_ACTIVE = false;
 
             for(WordObject word : game.arrWordObjects)
-                if(word.getType() == WordObject.NORMAL_TYPE)
+                if(word.getType() != WordObject.LIBRARY_POWER_TYPE )
                     word.getBody().setLinearVelocity(0f, 0f);
         }
-
-        if(ICE_POWER_ACTIVATED)
-            timeIceActivated += delta;
 
         if(timeIceActivated >= 5f && ICE_POWER_ACTIVATED) {
             world.setGravity(new Vector2(0,game.gravity.y));
@@ -63,16 +65,20 @@ public class PowerEvents {
 
     public void slowPowerActivate(float delta) {
 
-        if(timeSlowActivated == 0 && SLOW_POWER_ACTIVATED) {
-            world.setGravity(new Vector2(0,game.gravity.y/3));
+        if(timeSlowActivated == 0 && SLOW_POWER_ACTIVATED)
+            game.powersQueue--;
+
+        if(SLOW_POWER_ACTIVATED) {
+            timeSlowActivated += delta;
+
+            world.setGravity(new Vector2(0,game.gravity.y/2));
 
             for(WordObject word : game.arrWordObjects)
-                if(word.getType() == WordObject.NORMAL_TYPE)
-                    word.getBody().setLinearVelocity(0f, 0f);
-        }
+                if(word.getType() != WordObject.LIBRARY_POWER_TYPE)
+                    word.getBody().setLinearVelocity(0f, game.gravity.y/2);
 
-        if(SLOW_POWER_ACTIVATED)
-            timeSlowActivated += delta;
+            System.out.println(world.getGravity().y);
+        }
 
         if(timeSlowActivated >= 5f && SLOW_POWER_ACTIVATED) {
             world.setGravity(new Vector2(0,game.gravity.y));
@@ -80,12 +86,13 @@ public class PowerEvents {
             timeSlowActivated = 0;
 
             for(WordObject word : game.arrWordObjects)
-                word.getBody().setLinearVelocity(0f, -0.09f);
+                word.getBody().setLinearVelocity(0f, -0.1f);
         }
     }
 
     public void windPowerActivate() {
         game.lostWords = 0;
+        game.powersQueue--;
         WIND_POWER_ACTIVATED = false;
     }
 }

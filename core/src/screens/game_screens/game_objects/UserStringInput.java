@@ -1,15 +1,17 @@
 package screens.game_screens.game_objects;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.crazy_writer_game.CrazyWriterGame;
+import screens.game_screens.Utils.GameAssets;
 import screens.game_screens.Utils.GameUtils;
 
 public class UserStringInput {
     //Needed to calculate the width of the string and build the word container
-    float PADDING_BETWEEN_WORDS = 0.03f;
+    float PADDING_BETWEEN_WORDS = 0.00f;
     static final float WIDTH = 0.15f;
     static final float HEIGHT = 0.25f;
     float DISTANCE_FROM_CENTER;
@@ -27,6 +29,7 @@ public class UserStringInput {
     World world;
     Body borderRight, borderLeft;
     Vector2 positionBorderRight, positionBorderLeft;
+    float positionLeft, positionRight;
     Vector2 size;
 
     int position=0;
@@ -41,6 +44,8 @@ public class UserStringInput {
 
         size = new Vector2(WIDTH, HEIGHT);
         //Origin position
+        positionRight = SCREEN_CENTER + WIDTH + PADDING_BETWEEN_WORDS/2;
+        positionLeft = SCREEN_CENTER - WIDTH - PADDING_BETWEEN_WORDS/2;
         positionBorderLeft = new Vector2(SCREEN_CENTER - WIDTH - PADDING_BETWEEN_WORDS/2, 0.4f);
         positionBorderRight = new Vector2(SCREEN_CENTER + WIDTH + PADDING_BETWEEN_WORDS/2, 0.4f);
 
@@ -64,8 +69,8 @@ public class UserStringInput {
                     (UserLetter.WIDTH) +
                     ((letters.size - 1) * UserLetter.WIDTH);
 
-            float positionLeft = SCREEN_CENTER - DISTANCE_FROM_CENTER;
-            float positionRight = SCREEN_CENTER + DISTANCE_FROM_CENTER;
+            this.positionLeft = SCREEN_CENTER - DISTANCE_FROM_CENTER;
+            this.positionRight = SCREEN_CENTER + DISTANCE_FROM_CENTER;
             borderLeft.setTransform(positionLeft, positionBorderLeft.y, borderLeft.getAngle());
             borderRight.setTransform(positionRight, positionBorderRight.y, borderLeft.getAngle());
 
@@ -106,11 +111,25 @@ public class UserStringInput {
     }
 
     public void initialPosition() {
+        positionRight = SCREEN_CENTER + WIDTH + PADDING_BETWEEN_WORDS/2;
+        positionLeft = SCREEN_CENTER - WIDTH - PADDING_BETWEEN_WORDS/2;
+
         borderLeft.setTransform(SCREEN_CENTER - WIDTH - PADDING_BETWEEN_WORDS/2, positionBorderLeft.y, borderLeft.getAngle());
         borderRight.setTransform(SCREEN_CENTER + WIDTH + PADDING_BETWEEN_WORDS/2, positionBorderRight.y, borderLeft.getAngle());
     }
 
     public void draw() {
+        Sprite spriteCursorRight = GameAssets.cursorRight;
+        spriteCursorRight.setPosition(positionRight*100-15, positionBorderRight.y*100/2);
+        spriteCursorRight.setSize(30, 47);
+
+        Sprite spriteCursorLeft = GameAssets.cursorLeft;
+        spriteCursorLeft.setPosition(positionLeft*100-15, positionBorderLeft.y*100/2);
+        spriteCursorLeft.setSize(30, 47);
+
+        spriteCursorRight.draw(game.batch);
+        spriteCursorLeft.draw(game.batch);
+
         for (UserLetter letter: letters) {
             letter.draw(game);
         }

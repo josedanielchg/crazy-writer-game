@@ -1,10 +1,12 @@
 package screens.game_screens.game_objects;
 
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.crazy_writer_game.CrazyWriterGame;
+import screens.game_screens.Utils.GameAssets;
 import screens.game_screens.Utils.GameUtils;
 
 public class WordObject {
@@ -50,22 +52,10 @@ public class WordObject {
 
         if(type == POWER_TYPE) {
             int power = MathUtils.random(0, 3);
-            if(power == 0) {
-                this.powerType = FIRE_POWER;
-                this.text += "FFF";
-            }
-            if(power == 1) {
-                this.powerType = ICE_POWER;
-                this.text += "III";
-            }
-            if(power == 2) {
-                this.powerType = SLOW_POWER;
-                this.text += "SSS";
-            }
-            if(power == 3)  {
-                this.powerType = WIND_POWER;
-                this.text += "WWW";
-            }
+            if(power == 0) this.powerType = FIRE_POWER;
+            if(power == 1) this.powerType = ICE_POWER;
+            if(power == 2) this.powerType = SLOW_POWER;
+            if(power == 3) this.powerType = WIND_POWER;
         }
 
         layout = new GlyphLayout(game.font, this.text);
@@ -90,7 +80,7 @@ public class WordObject {
 
         this.world = world;
         body = GameUtils.createBody(GameUtils.DYNAMIC_BODY, size, position, world, this);
-        body.applyLinearImpulse(new Vector2(0f, -4.8f), body.getLocalCenter(), true);
+        body.applyLinearImpulse(new Vector2(0f, -4f), body.getWorldCenter(), true);
     }
 
 
@@ -100,8 +90,9 @@ public class WordObject {
     }
 
     public void draw(CrazyWriterGame game) {
-        float x = 0f;
-        float y = 0f;
+        selectSprite(game);
+        float x = 0f, y = 0f;
+
         if(this.type != LIBRARY_POWER_TYPE) {
             x = (position.x-(size.x)+ HORIZONTAL_PADDING /2)*100;
             y = (position.y+(size.y)-VERTICAL_PADDING)*100;
@@ -112,6 +103,27 @@ public class WordObject {
         }
 
         game.font.draw(game.batch, text, x, y);
+    }
+
+    private void selectSprite(CrazyWriterGame game) {
+        Sprite sprite = GameAssets.normal_word;
+        float keyframeX = position.x*100-size.x*100;
+        float keyframeY = position.y*100-size.y*100-VERTICAL_PADDING*100/2;
+        float sizeX = layout.width+HORIZONTAL_PADDING*100;
+        float sizeY = size.y*200;
+
+        if(type == POWER_TYPE) {
+            if(powerType == FIRE_POWER) sprite = GameAssets.fire_word;
+            if(powerType == ICE_POWER) sprite = GameAssets.ice_word;
+            if(powerType == SLOW_POWER) sprite = GameAssets.slow_word;
+            if(powerType == WIND_POWER) sprite = GameAssets.wind_word;
+        }
+
+        if(type == LIBRARY_POWER_TYPE) sizeX = POWER_WIDTH;
+
+        sprite.setPosition(keyframeX, keyframeY);
+        sprite.setSize(sizeX, sizeY);
+        sprite.draw(game.batch);
     }
 
     public Body getBody() { return body; }
