@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.crazy_writer_game.CrazyWriterGame;
 import screens.Screens;
+import screens.game_screens.Utils.GameAssets;
 import screens.game_screens.Utils.GameUtils;
 import screens.game_screens.game_objects.*;
 
@@ -23,12 +24,12 @@ public class GameScreen extends Screens {
     public final Vector2 gravity;
     public final Array<Body> arrBodies;
     public final Array<WordObject> arrWordObjects;
-    public Array<WordObject> arrPowers;
     private long score=0;
     private long lastDropTime;
     public short lostWords=0;
     public short lostWordsScore=0;
     private short writeWords=0;
+    public int powersQueue = 0;
     UserStringInput userStringInput;
     Array<String> listWords;
     PowerEvents powerEvents;
@@ -42,6 +43,8 @@ public class GameScreen extends Screens {
         super(game);
         SPAWN_WORD_RATE_IN_SECONDS = spawn_rate_seconds;
 
+        GameAssets.load();
+
         listWords = GameUtils.getWords(GameUtils.WORDS_OF_4_LETTERS_OR_LESS);
 
         this.gravity = new Vector2(0, gravity);
@@ -50,11 +53,11 @@ public class GameScreen extends Screens {
 
         arrBodies = new Array<>();
         arrWordObjects = new Array<>();
-        arrPowers = new Array<>();
 
         FloorObject floor = new FloorObject(this, 0f, WORD_HEIGHT-5.5f);
         WallObject leftWall = new WallObject(this, 1.02f);
         WallObject rightWall = new WallObject(this, 5.93f);
+        WallObject lastWall = new WallObject(this, WORD_WIDTH);
         FloorObject bottomShelf = new FloorObject(this, 5.93f, WORD_HEIGHT-3.6f);
         FloorObject topShelf = new FloorObject(this, 5.93f, WORD_HEIGHT-2.54f);
 
@@ -70,6 +73,8 @@ public class GameScreen extends Screens {
 
         //Draw CameraUI
         game.batch.begin();
+        GameAssets.background.draw(game.batch);
+
         game.font.draw(game.batch, "Fps: "+ Gdx.graphics.getFramesPerSecond(), 4, 20);
         game.font.draw(game.batch, "Lost Words: "+ lostWords, 4, 35);
         game.font.draw(game.batch, "Write Words: "+ writeWords, 4, 50);
@@ -88,7 +93,7 @@ public class GameScreen extends Screens {
         //Draw CameraBox2D
         game.batch.begin();
         cameraBox2D.update();
-        renderer.render(world, cameraBox2D.combined);
+        //renderer.render(world, cameraBox2D.combined);
         game.batch.end();
     }
 
@@ -100,7 +105,7 @@ public class GameScreen extends Screens {
             createWord();
         }
 
-        world.step(delta, 6, 2);
+        world.step(delta, 8, 6);
         world.getBodies(arrBodies);
 
         //Spawn a new Word
@@ -181,28 +186,21 @@ public class GameScreen extends Screens {
                     score +=200;
                     writeWords++;
 
-                    if(word.getType() == WordObject.POWER_TYPE && arrPowers.size < 4){
+                    if(word.getType() == WordObject.POWER_TYPE && powersQueue < 4){
                         WordObject wordPower;
+                        powersQueue++;
 
-                        if(word.getPowerType() == WordObject.FIRE_POWER) {
+                        if(word.getPowerType() == WordObject.FIRE_POWER)
                             wordPower = new WordObject(world, "FIRE", game, WordObject.LIBRARY_POWER_TYPE);
-                            arrPowers.add(wordPower);
-                        }
 
-                        if(word.getPowerType() == WordObject.ICE_POWER) {
+                        if(word.getPowerType() == WordObject.ICE_POWER)
                             wordPower = new WordObject(world, "ICE", game, WordObject.LIBRARY_POWER_TYPE);
-                            arrPowers.add(wordPower);
-                        }
 
-                        if(word.getPowerType() == WordObject.SLOW_POWER) {
+                        if(word.getPowerType() == WordObject.SLOW_POWER)
                             wordPower = new WordObject(world, "SLOW", game, WordObject.LIBRARY_POWER_TYPE);
-                            arrPowers.add(wordPower);
-                        }
 
-                        if(word.getPowerType() == WordObject.WIND_POWER) {
+                        if(word.getPowerType() == WordObject.WIND_POWER)
                             wordPower = new WordObject(world, "WIND", game, WordObject.LIBRARY_POWER_TYPE);
-                            arrPowers.add(wordPower);
-                        }
                     }
                     break;
                 }
@@ -253,7 +251,7 @@ public class GameScreen extends Screens {
             }
 
             for (Body wrongWord: wrongWords) {
-                wrongWord.applyLinearImpulse(new Vector2(0f, -0.25f), wrongWord.getLocalCenter(), true);
+                wrongWord.applyLinearImpulse(new Vector2(0f, -0.25f), wrongWord.getWorldCenter(), true);
             }
         }
         userStringInput.removeAllLetters();

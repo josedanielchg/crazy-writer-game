@@ -35,6 +35,8 @@ public class GameUtils {
 
         FixtureDef fixDef = new FixtureDef();
         fixDef.shape = shape;
+        fixDef.density = 15;
+        fixDef.restitution = .1f;
 
         Body body = world.createBody(bd);
         body.createFixture(fixDef);
@@ -51,26 +53,26 @@ public class GameUtils {
         if (nLetters >= WORDS_OF_4_LETTERS_OR_LESS) {
             for (int i = 0; i < data.size; i++)
                 listWords.add(data.get(i).toString());
-        }
 
-        if (nLetters >= WORDS_OF_5_LETTERS_OR_LESS) {
-            for (int i = 0; i < data.size; i++)
-                listWords.add(data.get(i).toString());
-        }
+            if (nLetters >= WORDS_OF_5_LETTERS_OR_LESS) {
+                for (int i = 0; i < data.size; i++)
+                    listWords.add(data.get(i).toString());
 
-        if (nLetters >= WORDS_OF_6_LETTERS_OR_LESS) {
-            for (int i = 0; i < data.size; i++)
-                listWords.add(data.get(i).toString());
-        }
+                if (nLetters >= WORDS_OF_6_LETTERS_OR_LESS) {
+                    for (int i = 0; i < data.size; i++)
+                        listWords.add(data.get(i).toString());
 
-        if (nLetters >= WORDS_OF_7_LETTERS_OR_LESS) {
-            for (int i = 0; i < data.size; i++)
-                listWords.add(data.get(i).toString());
-        }
+                    if (nLetters >= WORDS_OF_7_LETTERS_OR_LESS) {
+                        for (int i = 0; i < data.size; i++)
+                            listWords.add(data.get(i).toString());
 
-        if (nLetters >= WORDS_OF_15_LETTERS_OR_MORE) {
-            for (int i = 0; i < data.size; i++)
-                listWords.add(data.get(i).toString());
+                        if (nLetters >= WORDS_OF_15_LETTERS_OR_MORE) {
+                            for (int i = 0; i < data.size; i++)
+                                listWords.add(data.get(i).toString());
+                        }
+                    }
+                }
+            }
         }
 
         return listWords;
