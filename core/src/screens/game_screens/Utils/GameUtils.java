@@ -4,11 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-
-import java.util.ArrayList;
 
 public class GameUtils {
 
@@ -20,7 +17,6 @@ public class GameUtils {
     public static short WORDS_OF_6_LETTERS_OR_LESS = 3;
     public static short WORDS_OF_7_LETTERS_OR_LESS = 4;
     public static short WORDS_OF_15_LETTERS_OR_MORE = 5;
-
 
     public static Body createBody(short type, Vector2 size, Vector2 position, World world, Object obj) {
 
@@ -43,7 +39,7 @@ public class GameUtils {
         Body body = world.createBody(bd);
         body.createFixture(fixDef);
         shape.dispose();
-
+        body.setUserData(obj);
         return body;
     }
 
