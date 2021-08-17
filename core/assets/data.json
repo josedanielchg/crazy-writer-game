@@ -3,8 +3,8 @@
     "level": 1,
     "lock": "true",
     "stars": 0,
-    "gravity": 0.1,
-    "spawn_rate_words": 0.1,
+    "gravity": "-0.1f",
+    "spawn_rate_words": "3f",
     "lost_words_to_lose": 0,
     "write_words_to_win": 0,
     "maximum_letters_per_word": 4

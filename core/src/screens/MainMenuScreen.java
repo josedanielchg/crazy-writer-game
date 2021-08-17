@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.crazy_writer_game.CrazyWriterGame;
 import components.DataLevelsGame;
 import components.DynamicButton;
+import screens.game_screens.GameScreen;
 import utilities.Resource;
 
 public class MainMenuScreen extends Screens{

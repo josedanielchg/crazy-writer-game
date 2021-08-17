@@ -5,6 +5,8 @@ import com.crazy_writer_game.CrazyWriterGame;
 import components.BookLevel;
 import components.DataLevelsGame;
 import components.DynamicButton;
+import screens.game_screens.GameScreen;
+import utilities.Resource;
 import utilities.Resource;
 
 public class LevelMenuScreen extends Screens{
@@ -59,18 +61,8 @@ public class LevelMenuScreen extends Screens{
             // if Button isPressed and isUnLocked make a new Level
             if((books[i].isPressed() && books[i].isUnlocked()) || (i == 0 && books[i].isPressed())){
                 //TODO: CREAR EL MUNDO DEL JUEGO
-                //this.game.setScreen(new GameScreen(this.game)); // data
-                this.game.setScreen(new GameScreen(this.game)); // data
+                this.game.setScreen(new GameScreen(game, DataLevelsGame.listGameLevel.get(i).spawn_rate_words,  DataLevelsGame.listGameLevel.get(i).gravity));
             }
-
-            /*if(books[i].isPressed()  && i == 4){
-                System.out.println("Estrellas: " + DataLevelsGame.listGameLevel.get(1).stars);
-                DataLevelsGame.listGameLevel.get(1).lock = false;
-                DataLevelsGame.listGameLevel.get(1).stars = 3;
-                System.out.println("Estrellas: " + DataLevelsGame.listGameLevel.get(1).stars);
-                DataLevelsGame.save();
-                this.game.setScreen(new MainMenuScreen(this.game));
-            }*/
         }
 
         game.batch.draw(btnBack.getButton(), btnBack.getX(), btnBack.getY(), btnBack.getWidth(), btnBack.getHeight());

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import components.DataLevelsGame;
-import screens.LevelMenuScreen;
 import screens.MainMenuScreen;
 
 public class CrazyWriterGame extends Game {
@@ -15,7 +14,6 @@ public class CrazyWriterGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-
 		// load data levels Game from Json
 		DataLevelsGame.load();
 		this.setScreen(new MainMenuScreen(this));

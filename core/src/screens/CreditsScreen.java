@@ -22,8 +22,6 @@ public class CreditsScreen extends Screens{
         if(btnBack.isPressed())
             game.setScreen(new MainMenuScreen(game));
 
-
-
         game.batch.begin();
 
         game.batch.draw(bg, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
