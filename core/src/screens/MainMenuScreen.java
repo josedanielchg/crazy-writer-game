@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.crazy_writer_game.CrazyWriterGame;
+import components.DataLevelsGame;
 import components.DynamicButton;
 import utilities.Resource;
 
@@ -37,24 +38,10 @@ public class MainMenuScreen extends Screens{
         game.batch.draw(btnQuit.getButton(), btnQuit.getX(), btnQuit.getY(), btnQuit.getWidth(), btnQuit.getHeight());
         game.batch.draw(btnCredits.getButton(), btnCredits.getX(), btnCredits.getY(), btnCredits.getWidth(), btnCredits.getHeight());
 
-
-       //--------------
-        /*game.font.draw(game.batch, "X: "+ Gdx.input.getX() + " Y: " + Gdx.input.getY()
-                + " -- " + (btnPlay.getX()*1.1) + "," + (btnPlay.getY()*1.1), 5, 15);
-
-        game.font.draw(game.batch, "X: "+ Gdx.input.getX() + "  dx:" +  (Gdx.graphics.getHeight() - Gdx.input.getY()), 300, 15);
-        // ---------------
-           game.font.draw(game.batch, "->" + (Gdx.input.getX()) + ", "
-                   + (Gdx.graphics.getHeight() - Gdx.input.getY()) , 300, 500);
-        game.font.draw(game.batch, "DELTA: " + TimeUtils.nanoTime() , 500, 500);*/
-        //if(btnCredits.isPressed()){
-        //   game.font.draw(game.batch, "PRESSED", 300, 500);
-        //}
-
         game.batch.end();
 
         if(btnPlay.isPressed())
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new LevelMenuScreen(game));
 
         if(btnCredits.isPressed())
             game.setScreen(new CreditsScreen(game));

@@ -1,0 +1,102 @@
+[
+  {
+    "level": 1,
+    "lock": "true",
+    "stars": 0,
+    "gravity": 0.1,
+    "spawn_rate_words": 0.1,
+    "lost_words_to_lose": 0,
+    "write_words_to_win": 0,
+    "maximum_letters_per_word": 4
+  },
+  {
+    "level": 2,
+    "lock": "true",
+    "stars": 0,
+    "gravity": 0.1,
+    "spawn_rate_words": 0.1,
+    "lost_words_to_lose": 0,
+    "write_words_to_win": 0,
+    "maximum_letters_per_word": 7
+  },
+  {
+    "level": 3,
+    "lock": "true",
+    "stars": 0,
+    "gravity": 0.1,
+    "spawn_rate_words": 0.1,
+    "lost_words_to_lose": 0,
+    "write_words_to_win": 0,
+    "maximum_letters_per_word": 0
+  },
+  {
+    "level": 4,
+    "lock": "true",
+    "stars": 0,
+    "gravity": 0.1,
+    "spawn_rate_words": 0.1,
+    "lost_words_to_lose": 0,
+    "write_words_to_win": 0,
+    "maximum_letters_per_word": 0
+  },
+  {
+    "level": 5,
+    "lock": "true",
+    "stars": 0,
+    "gravity": 0.1,
+    "spawn_rate_words": 0.1,
+    "lost_words_to_lose": 0,
+    "write_words_to_win": 0,
+    "maximum_letters_per_word": 0
+  },
+  {
+    "level": "6",
+    "lock": "true",
+    "stars": "0",
+    "gravity": "0",
+    "spawn_rate_words": "0",
+    "lost_words_to_lose": "0",
+    "write_words_to_win": "0",
+    "maximum_letters_per_word": "0"
+  },
+  {
+    "level": "7",
+    "lock": "true",
+    "stars": "0",
+    "gravity": "0",
+    "spawn_rate_words": "0",
+    "lost_words_to_lose": "0",
+    "write_words_to_win": "0",
+    "maximum_letters_per_word": "0"
+  },
+  {
+    "level": "8",
+    "lock": "true",
+    "stars": "0",
+    "gravity": "0",
+    "spawn_rate_words": "0",
+    "lost_words_to_lose": "0",
+    "write_words_to_win": "0",
+    "maximum_letters_per_word": "0"
+  },
+  {
+    "level": "9",
+    "lock": "true",
+    "stars": "0",
+    "gravity": "0",
+    "spawn_rate_words": "0",
+    "lost_words_to_lose": "0",
+    "write_words_to_win": "0",
+    "maximum_letters_per_word": "0"
+  },
+  {
+    "level": "10",
+    "lock": "true",
+    "stars": "0",
+    "gravity": "0",
+    "spawn_rate_words": "0",
+    "lost_words_to_lose": "0",
+    "write_words_to_win": "0",
+    "maximum_letters_per_word": "0"
+  }
+]
