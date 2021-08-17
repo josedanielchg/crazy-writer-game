@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.crazy_writer_game.CrazyWriterGame;
 import components.DynamicButton;
+import screens.game_screens.GameScreen;
 import utilities.Resource;
 
 public class MainMenuScreen extends Screens{
@@ -54,7 +55,7 @@ public class MainMenuScreen extends Screens{
         game.batch.end();
 
         if(btnPlay.isPressed())
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new GameScreen(game, 3f, -0.1f));
 
         if(btnCredits.isPressed())
             game.setScreen(new CreditsScreen(game));
