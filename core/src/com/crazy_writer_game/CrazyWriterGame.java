@@ -19,7 +19,7 @@ public class CrazyWriterGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("./music&sound/Sound 2.mp3"));
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.local("./music&sound/Sound 2.mp3"));
 		backgroundMusic.setLooping(true);
 		backgroundMusic.setVolume(0.2f);
 		backgroundMusic.play();

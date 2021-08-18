@@ -80,28 +80,28 @@ public class GameAssets {
     }
 
     public static void loadSounds() {
-        music1 = Gdx.audio.newMusic(Gdx.files.internal("./music&sound/Sound 1.mp3"));
-        music3 = Gdx.audio.newMusic(Gdx.files.internal("./music&sound/Sound 3.mp3"));
-        music4 = Gdx.audio.newMusic(Gdx.files.internal("./music&sound/Sound 4.mp3"));
-        music5 = Gdx.audio.newMusic(Gdx.files.internal("./music&sound/Sound 5.mp3"));
+        music1 = Gdx.audio.newMusic(Gdx.files.local("./music&sound/Sound 1.mp3"));
+        music3 = Gdx.audio.newMusic(Gdx.files.local("./music&sound/Sound 3.mp3"));
+        music4 = Gdx.audio.newMusic(Gdx.files.local("./music&sound/Sound 4.mp3"));
+        music5 = Gdx.audio.newMusic(Gdx.files.local("./music&sound/Sound 5.mp3"));
 
-        sound12 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 12.mp3"));
-        sound13 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 13.mp3"));
-        sound17 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 17.mp3"));
-        sound23 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 23.mp3"));
-        sound27 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 27.mp3"));
-        sound30 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 30.mp3"));
-        sound41 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 41.mp3"));
-        sound52 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 52.mp3"));
-        sound60 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 60.mp3"));
-        sound61 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 61.mp3"));
-        sound62 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 62.mp3"));
-        sound63 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 63.mp3"));
-        sound64 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 64.mp3"));
-        sound66 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 66.mp3"));
-        sound67 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 67.mp3"));
-        sound68 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 68.mp3"));
-        sound77 = Gdx.audio.newSound(Gdx.files.internal("./music&sound/Sound 77.mp3"));
+        sound12 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 12.mp3"));
+        sound13 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 13.mp3"));
+        sound17 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 17.mp3"));
+        sound23 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 23.mp3"));
+        sound27 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 27.mp3"));
+        sound30 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 30.mp3"));
+        sound41 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 41.mp3"));
+        sound52 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 52.mp3"));
+        sound60 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 60.mp3"));
+        sound61 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 61.mp3"));
+        sound62 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 62.mp3"));
+        sound63 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 63.mp3"));
+        sound64 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 64.mp3"));
+        sound66 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 66.mp3"));
+        sound67 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 67.mp3"));
+        sound68 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 68.mp3"));
+        sound77 = Gdx.audio.newSound(Gdx.files.local("./music&sound/Sound 77.mp3"));
     }
 
     public static void dispose() {
