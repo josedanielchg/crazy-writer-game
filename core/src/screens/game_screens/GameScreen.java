@@ -40,7 +40,7 @@ public class GameScreen extends Screens {
     private short generationWordState = BOX_GENERATION_SUCCESS;
 
     //Constructor
-    public GameScreen(CrazyWriterGame game, float spawn_rate_seconds, float gravity) {
+    public GameScreen(CrazyWriterGame game, int Level, float spawn_rate_seconds, float gravity, int lost_words_to_lose, int write_words_to_win, int maximum_letters_per_word) {
         super(game);
         SPAWN_WORD_RATE_IN_SECONDS = spawn_rate_seconds;
 

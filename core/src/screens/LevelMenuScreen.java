@@ -60,8 +60,21 @@ public class LevelMenuScreen extends Screens{
 
             // if Button isPressed and isUnLocked make a new Level
             if((books[i].isPressed() && books[i].isUnlocked()) || (i == 0 && books[i].isPressed())){
-                //TODO: CREAR EL MUNDO DEL JUEGO
-                this.game.setScreen(new GameScreen(game, DataLevelsGame.listGameLevel.get(i).spawn_rate_words,  DataLevelsGame.listGameLevel.get(i).gravity));
+
+
+                //para mostrar nivel completado asi
+                // en level me pasas lo que tengas en GameScreen.level
+                this.game.setScreen(new LevelCompleteScreen(this.game, DataLevelsGame.listGameLevel.get(i).level, 2));
+
+                // para crear un nivel asi
+                /*this.game.setScreen(new GameScreen(game,
+                        DataLevelsGame.listGameLevel.get(i).level,
+                        DataLevelsGame.listGameLevel.get(i).spawn_rate_words,
+                        DataLevelsGame.listGameLevel.get(i).gravity,
+                        DataLevelsGame.listGameLevel.get(i).lost_words_to_lose,
+                        DataLevelsGame.listGameLevel.get(i).write_words_to_win,
+                        DataLevelsGame.listGameLevel.get(i).maximum_letters_per_word));*/
+
             }
         }
 
