@@ -76,8 +76,6 @@ public class PowerEvents {
             for(WordObject word : game.arrWordObjects)
                 if(word.getType() != WordObject.LIBRARY_POWER_TYPE)
                     word.getBody().setLinearVelocity(0f, game.gravity.y/2);
-
-            System.out.println(world.getGravity().y);
         }
 
         if(timeSlowActivated >= 5f && SLOW_POWER_ACTIVATED) {

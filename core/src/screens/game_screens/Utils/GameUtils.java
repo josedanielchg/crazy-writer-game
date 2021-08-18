@@ -74,7 +74,6 @@ public class GameUtils {
                 }
             }
         }
-
         return listWords;
     }
 }
