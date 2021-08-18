@@ -1,5 +1,6 @@
 package screens.game_screens.game_objects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -101,8 +102,9 @@ public class WordObject {
             x = (position.x*100)-layout.width/2;
             y = (position.y*100)+layout.height/2;
         }
-
+        game.font.setColor(0, 0, 0, 1);
         game.font.draw(game.batch, text, x, y);
+        game.font.setColor(0.80f, 0.80f, 0.80f, 1);
     }
 
     private void selectSprite(CrazyWriterGame game) {
@@ -119,8 +121,13 @@ public class WordObject {
             if(powerType == WIND_POWER) sprite = GameAssets.wind_word;
         }
 
-        if(type == LIBRARY_POWER_TYPE) sizeX = POWER_WIDTH;
-
+        if(type == LIBRARY_POWER_TYPE) {
+            if(this.text.compareTo("FIRE")==0) sprite = GameAssets.fire_word;
+            if(this.text.compareTo("ICE")==0) sprite = GameAssets.ice_word;
+            if(this.text.compareTo("SLOW")==0) sprite = GameAssets.slow_word;
+            if(this.text.compareTo("WIND")==0) sprite = GameAssets.wind_word;
+            sizeX = POWER_WIDTH*200;
+        }
         sprite.setPosition(keyframeX, keyframeY);
         sprite.setSize(sizeX, sizeY);
         sprite.draw(game.batch);

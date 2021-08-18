@@ -33,6 +33,7 @@ public class GameScreen extends Screens {
     UserStringInput userStringInput;
     Array<String> listWords;
     PowerEvents powerEvents;
+    Writer writer;
 
     public static short BOX_GENERATION_ERROR_WALL = 1;
     public static short BOX_GENERATION_SUCCESS = 0;
@@ -61,6 +62,8 @@ public class GameScreen extends Screens {
         FloorObject bottomShelf = new FloorObject(this, 5.93f, WORD_HEIGHT-3.6f);
         FloorObject topShelf = new FloorObject(this, 5.93f, WORD_HEIGHT-2.54f);
 
+        writer = new Writer(game);
+
         world.setContactListener(new CollisionListener(this));
 
         userStringInput = new UserStringInput(WORD_WIDTH/2, world, game);
@@ -74,11 +77,12 @@ public class GameScreen extends Screens {
         //Draw CameraUI
         game.batch.begin();
         GameAssets.background.draw(game.batch);
+        writer.draw();
+        Score.draw(game, writeWords, score);
 
         game.font.draw(game.batch, "Fps: "+ Gdx.graphics.getFramesPerSecond(), 4, 20);
         game.font.draw(game.batch, "Lost Words: "+ lostWords, 4, 35);
-        game.font.draw(game.batch, "Write Words: "+ writeWords, 4, 50);
-        game.font.draw(game.batch, "Score: "+ score, 4, 65);
+        Papers.draw(lostWords, writeWords, game);
 
         world.getBodies(arrBodies);
         for(Body body:arrBodies) {
@@ -88,6 +92,7 @@ public class GameScreen extends Screens {
             }
         }
         userStringInput.draw();
+
         game.batch.end( );
 
         //Draw CameraBox2D
@@ -153,7 +158,9 @@ public class GameScreen extends Screens {
         if(Gdx.input.isKeyPressed(Input.Keys.DEL)) {
             userStringInput.removeLetter(delta);
         }
-        userStringInput.update();
+        userStringInput.update(delta);
+
+        writer.update(delta);
     }
 
 
@@ -224,6 +231,7 @@ public class GameScreen extends Screens {
 
         //User wrote wrong word
         if(!coincidence) {
+            userStringInput.wrongWord();
             Array<Body> wrongWords = new Array<>();
             int maxMatchLetters = 0;
             int iterationLetter;
@@ -251,7 +259,7 @@ public class GameScreen extends Screens {
             }
 
             for (Body wrongWord: wrongWords) {
-                wrongWord.applyLinearImpulse(new Vector2(0f, -0.25f), wrongWord.getWorldCenter(), true);
+                wrongWord.applyLinearImpulse(new Vector2(0f, gravity.y*3), wrongWord.getWorldCenter(), true);
             }
         }
         userStringInput.removeAllLetters();
@@ -259,7 +267,6 @@ public class GameScreen extends Screens {
 
 
     public void wordGenerationError() { this.generationWordState = BOX_GENERATION_ERROR_WALL; }
-
 
     @Override
     public boolean keyDown(int keycode) {
