@@ -232,10 +232,11 @@ public class GameScreen extends Screens {
                     if(word.getType() != WordObject.LIBRARY_POWER_TYPE)
                         writeWords++;
 
+                    if(word.getType() == WordObject.POWER_TYPE)
+                        GameAssets.sound30.play();
 
                     if(word.getType() == WordObject.POWER_TYPE && powersQueue < 4){
                         WordObject wordPower;
-                        GameAssets.sound30.play();
                         powersQueue++;
 
                         if(word.getPowerType() == WordObject.FIRE_POWER)
