@@ -1,6 +1,8 @@
 package screens.game_screens.game_objects;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -31,6 +33,14 @@ public class UserStringInput {
     Vector2 positionBorderRight, positionBorderLeft;
     float positionLeft, positionRight;
     Vector2 size;
+    short state;
+    short NORMAL_STATE = 0;
+    short WRONG_STATE = 1;
+
+    public Animation<TextureRegion> errorAnimation = GameAssets.error;
+    public Vector2 positionErrorAnimation = new Vector2(318, 40);
+    public Vector2 sizeErrorAnimation = new Vector2(59, 53);
+    public float stateTime = 0;
 
     int position=0;
     float positionLetter =0f;
@@ -41,6 +51,7 @@ public class UserStringInput {
         this.letters = new Array<>();
         SCREEN_CENTER = screenCenter;
         userInput = "";
+        this.state = NORMAL_STATE;
 
         size = new Vector2(WIDTH, HEIGHT);
         //Origin position
@@ -54,7 +65,7 @@ public class UserStringInput {
         borderLeft = GameUtils.createBody(GameUtils.KINEMATIC_BODY, size, positionBorderLeft, world, this);
     }
 
-    public void update() {
+    public void update(float delta) {
         if (LETTER_ADDED) {
             userInput += Character.toString(LETTER_TO_ADD);
             UserLetter letterObj = new UserLetter(6f, world, LETTER_TO_ADD, game);
@@ -108,6 +119,8 @@ public class UserStringInput {
             letters.clear();
             initialPosition();
         }
+
+        updateError(delta);
     }
 
     public void initialPosition() {
@@ -132,6 +145,34 @@ public class UserStringInput {
 
         for (UserLetter letter: letters) {
             letter.draw(game);
+        }
+
+        if(state == WRONG_STATE)
+            this.drawError();
+    }
+
+    public void drawError() {
+        if(this.state == WRONG_STATE) {
+            game.batch.draw(errorAnimation.getKeyFrame(this.stateTime),
+                    positionErrorAnimation.x+10,
+                    positionErrorAnimation.y-10,
+                    0.f,
+                    0.0f,
+                    sizeErrorAnimation.x/1.5f,
+                    sizeErrorAnimation.y/1.5f,
+                    1, 1, 0
+            );
+        }
+    }
+
+    public void updateError(float delta) {
+        if(this.state == WRONG_STATE) {
+            stateTime +=delta;
+
+            if(stateTime>0.5f) {
+                stateTime=0;
+                state = NORMAL_STATE;
+            }
         }
     }
 
@@ -163,6 +204,10 @@ public class UserStringInput {
 
     public void removeAllLetters() {
         REMOVE_ALL = true;
+    }
+
+    public void wrongWord() {
+        this.state = WRONG_STATE;
     }
 
     public Vector2 getSize() { return size; }

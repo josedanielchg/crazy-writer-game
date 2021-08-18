@@ -34,7 +34,7 @@ public class LevelCompleteScreen extends Screens{
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
             if(level==10)
                 this.game.setScreen(new MainMenuScreen(this.game));
-            else if(level!=2)
+            else
                 this.game.setScreen(new GameScreen(game,
                         DataLevelsGame.listGameLevel.get(level).level,
                         DataLevelsGame.listGameLevel.get(level).spawn_rate_words,
@@ -42,12 +42,9 @@ public class LevelCompleteScreen extends Screens{
                         DataLevelsGame.listGameLevel.get(level).lost_words_to_lose,
                         DataLevelsGame.listGameLevel.get(level).write_words_to_win,
                         DataLevelsGame.listGameLevel.get(level).maximum_letters_per_word));
-            else
-                this.game.setScreen(new GameOverScreen(this.game, level));
         }
 
         game.batch.begin();
-
         game.batch.draw(bg, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         game.batch.draw(message, (SCREEN_WIDTH/2) - (message.getWidth()/2), (SCREEN_HEIGHT/2) - (message.getHeight()/2), message.getWidth(), message.getHeight());
         game.batch.end();

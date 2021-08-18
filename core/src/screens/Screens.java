@@ -31,8 +31,6 @@ public abstract class Screens extends InputAdapter implements Screen {
         cameraBox2D.position.set(WORD_WIDTH/2f, WORD_HEIGHT/2f, 0);
 
         Gdx.input.setInputProcessor(this);
-
-        //TODO Agregar manejador de inputs
     }
 
     //Draw UI and Game Objects
@@ -75,7 +73,6 @@ public abstract class Screens extends InputAdapter implements Screen {
 
     @Override
     public void hide() {
-
     }
 
     @Override
