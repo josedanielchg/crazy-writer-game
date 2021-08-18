@@ -33,7 +33,7 @@ public class DynamicButton {
         int posX = Gdx.input.getX();
         int posY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-        if(Gdx.input.isTouched()){
+        if(Gdx.input.justTouched()){
             if( (posX > (getX()*1.05))
                 && (posX < (getX() + getWidth()*0.9))
             && (posY > getY()*1.15)

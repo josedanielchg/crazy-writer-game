@@ -1,6 +1,9 @@
 package screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.crazy_writer_game.CrazyWriterGame;
 import components.BookLevel;
 import components.DataLevelsGame;
@@ -15,6 +18,7 @@ public class LevelMenuScreen extends Screens{
     Texture bg;
     DynamicButton btnBack;
     BookLevel [] books;
+    float deltaTime;
 
     public LevelMenuScreen(CrazyWriterGame game) {
         super(game);
@@ -22,6 +26,7 @@ public class LevelMenuScreen extends Screens{
         bg = new Texture(Resource.BG_LEVEL_MENU);
         btnBack = new DynamicButton(Resource.BTN_BACK, 25, 25);
         books = new BookLevel[NUM_LEVELS];
+        deltaTime = TimeUtils.nanoTime() + 1000000000;
 
         String src = Resource.getBookStar(0);
         int dx=107 + 15, dy = BookLevel.POS_ROW_ONE, increaseX = 0;
@@ -46,7 +51,6 @@ public class LevelMenuScreen extends Screens{
 
     @Override
     public void draw(float delta) {
-
         if(btnBack.isPressed())
             game.setScreen(new MainMenuScreen(game));
 
@@ -59,7 +63,9 @@ public class LevelMenuScreen extends Screens{
             books[i].paintNumber(game.batch);
 
             // if Button isPressed and isUnLocked make a new Level
-            if((books[i].isPressed() && books[i].isUnlocked()) || (i == 0 && books[i].isPressed())){
+            if(TimeUtils.nanoTime() > deltaTime &&
+                    ((books[i].isPressed() && books[i].isUnlocked()) || (i == 0 && books[i].isPressed()))
+              ){
                 this.game.setScreen(new GameScreen(game,
                         DataLevelsGame.listGameLevel.get(i).level,
                         DataLevelsGame.listGameLevel.get(i).spawn_rate_words,
