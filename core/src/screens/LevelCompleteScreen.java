@@ -21,6 +21,7 @@ public class LevelCompleteScreen extends Screens{
         this.level = level;
 
         DataLevelsGame.listGameLevel.get(level-1).stars = stars;
+        DataLevelsGame.listGameLevel.get(level-1).lock = false;
 
         if(level!=10)
             DataLevelsGame.listGameLevel.get(level).lock = false;
@@ -31,9 +32,11 @@ public class LevelCompleteScreen extends Screens{
     @Override
     public void draw(float delta) {
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
-            if(level==10)
+            if(level==10) {
+                game.setScreen(new MainMenuScreen(game));
                 this.game.setScreen(new MainMenuScreen(this.game));
-            else
+            }
+            else if(level!=2)
                 this.game.setScreen(new GameScreen(game,
                         DataLevelsGame.listGameLevel.get(level).level,
                         DataLevelsGame.listGameLevel.get(level).spawn_rate_words,
@@ -41,6 +44,8 @@ public class LevelCompleteScreen extends Screens{
                         DataLevelsGame.listGameLevel.get(level).lost_words_to_lose,
                         DataLevelsGame.listGameLevel.get(level).write_words_to_win,
                         DataLevelsGame.listGameLevel.get(level).maximum_letters_per_word));
+            else
+                this.game.setScreen(new GameOverScreen(this.game, level));
         }
 
         game.batch.begin();

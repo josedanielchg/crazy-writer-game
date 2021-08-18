@@ -3,6 +3,7 @@ package components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import screens.game_screens.Utils.GameAssets;
 
 public class DynamicButton {
     private Texture imageBtn;
@@ -37,6 +38,7 @@ public class DynamicButton {
                 && (posX < (getX() + getWidth()*0.9))
             && (posY > getY()*1.15)
             && (posY < (getY() + getHeight()*0.9)) ){
+                GameAssets.sound12.setVolume(GameAssets.sound12.play(), 3f);
                 return true;
             }
         }

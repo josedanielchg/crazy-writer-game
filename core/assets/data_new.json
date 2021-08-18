@@ -1,0 +1,76 @@
+[
+{
+	"class": "components.GameLevel",
+	"level": 1,
+	"stars": 3,
+	"gravity": -0.1,
+	"spawn_rate_words": 3,
+	"lost_words_to_lose": 20,
+	"write_words_to_win": 20,
+	"maximum_letters_per_word": 4
+},
+{
+	"class": "components.GameLevel",
+	"level": 2,
+	"stars": 3,
+	"gravity": -0.125,
+	"spawn_rate_words": 3,
+	"lost_words_to_lose": 20,
+	"write_words_to_win": 20,
+	"maximum_letters_per_word": 7
+},
+{
+	"class": "components.GameLevel",
+	"level": 3,
+	"stars": 3,
+	"gravity": -0.15,
+	"spawn_rate_words": 3,
+	"lost_words_to_lose": 20,
+	"write_words_to_win": 20,
+	"maximum_letters_per_word": 10
+},
+{
+	"class": "components.GameLevel",
+	"level": 4,
+	"stars": 1,
+	"gravity": -0.175,
+	"spawn_rate_words": 3
+},
+{
+	"class": "components.GameLevel",
+	"level": 5,
+	"stars": 1,
+	"gravity": -0.2,
+	"spawn_rate_words": 3
+},
+{
+	"class": "components.GameLevel",
+	"level": 6,
+	"stars": 1,
+	"gravity": -0.225
+},
+{
+	"class": "components.GameLevel",
+	"level": 7,
+	"stars": 1,
+	"gravity": -0.25
+},
+{
+	"class": "components.GameLevel",
+	"level": 8,
+	"stars": 1,
+	"gravity": -0.275
+},
+{
+	"class": "components.GameLevel",
+	"level": 9,
+	"stars": 1,
+	"gravity": -0.3
+},
+{
+	"class": "components.GameLevel",
+	"level": 10,
+	"stars": 1,
+	"gravity": -0.31
+}
+]

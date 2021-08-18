@@ -21,7 +21,10 @@ public class Writer {
     public static Vector2 writingCharacterSize = new Vector2(108, 24);
     public static Animation<TextureRegion> writingCharacter = GameAssets.writingCharacter;
 
-    public static Vector2 writerNormalPosition = new Vector2(228, 145);
+    public static Animation<TextureRegion> happyWriterCharacter = GameAssets.happyWriter;
+    public static Animation<TextureRegion> angryWriterCharacter = GameAssets.angryWriter;
+
+    public static Vector2 writerNormalPosition = new Vector2(228, 140);
     public static Vector2 writerNormalSize = new Vector2(238, 218);
     public static Sprite writerNormalSprite = GameAssets.writerNormal;
 
@@ -31,9 +34,13 @@ public class Writer {
     public static short HAPPY_STATE = 3;
 
     float stateTime;
+    float stateTimeWriter = 0;
+    float state;
+    public static float timeToFinish = 0;
 
     public Writer(CrazyWriterGame game) {
         this.game = game;
+        state = NORMAL_STATE;
 
         deskSprite.setPosition(deskPosition.x, deskPosition.y);
         deskSprite.setSize(deskSize.x, deskSize.y);
@@ -48,21 +55,66 @@ public class Writer {
 
     public void draw() {
         deskSprite.draw(game.batch);
-        writerNormalSprite.draw(game.batch);
-        game.batch.draw(writingCharacter.getKeyFrame(this.stateTime),
-                writingCharacterPosition.x,
-                writingCharacterPosition.y,
-                0.f,
-                0.0f,
-                writingCharacterSize.x,
-                writingCharacterSize.y,
-                1, 1, 0
-        );
+
+        if(state == NORMAL_STATE) {
+            writerNormalSprite.draw(game.batch);
+            game.batch.draw(writingCharacter.getKeyFrame(this.stateTime),
+                    writingCharacterPosition.x,
+                    writingCharacterPosition.y,
+                    0.f,
+                    0.0f,
+                    writingCharacterSize.x,
+                    writingCharacterSize.y,
+                    1, 1, 0
+            );
+        }
+
+        if(state == HAPPY_STATE) {
+            game.batch.draw(happyWriterCharacter.getKeyFrame(this.stateTimeWriter),
+                    writerNormalPosition.x,
+                    writerNormalPosition.y,
+                    0f,
+                    0f,
+                    writerNormalSize.x,
+                    writerNormalSize.y,
+                    1, 1, 0
+            );
+        }
+
+        if(state == ANGRY_STATE) {
+            game.batch.draw(angryWriterCharacter.getKeyFrame(this.stateTimeWriter),
+                    writerNormalPosition.x,
+                    writerNormalPosition.y,
+                    0f,
+                    0f,
+                    writerNormalSize.x,
+                    writerNormalSize.y,
+                    1, 1, 0
+            );
+        }
+
+        if(state == HAPPY_STATE || state == ANGRY_STATE) {
+            game.batch.draw(writingCharacter.getKeyFrame(5.39f),
+                    writingCharacterPosition.x,
+                    writingCharacterPosition.y,
+                    0.f,
+                    0.0f,
+                    writingCharacterSize.x,
+                    writingCharacterSize.y,
+                    1, 1, 0
+            );
+        }
 
         typeWriterSprite.draw(game.batch);
     }
 
     public void update(float delta) {
         stateTime +=delta;
+        stateTimeWriter += delta;
+
+        if(state == HAPPY_STATE || state == ANGRY_STATE)
+            timeToFinish += delta;
     }
+
+    public void changeState(short state){ this.state = state; stateTimeWriter =0;}
 }

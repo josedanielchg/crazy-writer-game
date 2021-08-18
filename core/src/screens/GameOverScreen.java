@@ -7,6 +7,7 @@ import com.crazy_writer_game.CrazyWriterGame;
 import components.DataLevelsGame;
 import components.DynamicButton;
 import screens.game_screens.GameScreen;
+import screens.game_screens.Utils.GameAssets;
 import utilities.Resource;
 
 public class GameOverScreen extends Screens{
@@ -17,6 +18,7 @@ public class GameOverScreen extends Screens{
 
     public GameOverScreen(CrazyWriterGame game, int level) {
         super(game);
+        GameAssets.sound27.setVolume(GameAssets.sound27.play(), 0.08f);
         bg = new Texture(Resource.BG_GAME_SCREEN);
         message = new Texture(Resource.GAME_OVER);
         btnBack = new DynamicButton(Resource.BTN_BACK, 25, 25);
@@ -24,8 +26,10 @@ public class GameOverScreen extends Screens{
     }
 
     public void draw(float delta) {
-        if(btnBack.isPressed())
+        if(btnBack.isPressed()) {
+            game.backgroundMusic.play();
             game.setScreen(new MainMenuScreen(game));
+        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
             this.game.setScreen(new GameScreen(game,

@@ -73,7 +73,6 @@ public abstract class Screens extends InputAdapter implements Screen {
 
     @Override
     public void hide() {
-
     }
 
     @Override

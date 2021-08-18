@@ -16,9 +16,12 @@ public class Papers {
     public static Vector2 winnerPapersSize = new Vector2(86, 169);
     public static Animation<TextureRegion> winnerPapers = GameAssets.winnerPapers;
 
-    public static void draw(int lostWords, int writtenWords, CrazyWriterGame game) {
-        if(lostWords > 0)
-            game.batch.draw(loserPapers.getKeyFrame(lostWords),
+    public static int maxFramesLostWords = 37;
+    public static int maxFramesWrittenWords = 14;
+
+    public static void draw(int lostWords, int writtenWords, float percentageLostWords, float percentageWrittenWords, CrazyWriterGame game) {
+        if(lostWords > 0) {
+            game.batch.draw(loserPapers.getKeyFrame(maxFramesLostWords*percentageLostWords),
                     loserPapersPosition.x,
                     loserPapersPosition.y,
                     0.f,
@@ -27,9 +30,10 @@ public class Papers {
                     loserPapersSize.y,
                     1, 1, 0
             );
+        }
 
-        if(writtenWords > 0)
-            game.batch.draw(winnerPapers.getKeyFrame(writtenWords),
+        if(writtenWords > 0) {
+            game.batch.draw(winnerPapers.getKeyFrame(maxFramesWrittenWords*percentageWrittenWords),
                     winnerPapersPosition.x,
                     winnerPapersPosition.y,
                     0.f,
@@ -38,5 +42,7 @@ public class Papers {
                     winnerPapersSize.y,
                     1, 1, 0
             );
+        }
+
     }
 }
