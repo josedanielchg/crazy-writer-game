@@ -3,10 +3,11 @@ package screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.crazy_writer_game.CrazyWriterGame;
 import components.BookLevel;
+import components.DataLevelsGame;
 import components.DynamicButton;
+import screens.game_screens.GameScreen;
 import utilities.Resource;
-
-import java.awt.print.Book;
+import utilities.Resource;
 
 public class LevelMenuScreen extends Screens{
     final int NUM_LEVELS = 10;
@@ -22,21 +23,22 @@ public class LevelMenuScreen extends Screens{
         btnBack = new DynamicButton(Resource.BTN_BACK, 25, 25);
         books = new BookLevel[NUM_LEVELS];
 
-        String configFromJson = "", src = "";
-        int dx=107+15, dy = BookLevel.POS_ROW_ONE, increaseX = 0;
-
-        // TODO: Comprobar que el primer libro no tenga el candado
-        if(true)
-            src = Resource.getBookStar(0);
+        String src = Resource.getBookStar(0);
+        int dx=107 + 15, dy = BookLevel.POS_ROW_ONE, increaseX = 0;
 
         for(int i = 0; i < 10; i++) {
+
+            if(DataLevelsGame.listGameLevel.get(i).lock && i>0)
+                src = Resource.BOOK_LOCK;
+            else if(DataLevelsGame.listGameLevel.get(i).lock == false)
+                src = Resource.getBookStar(DataLevelsGame.listGameLevel.get(i).stars);
 
             if (i == 5) {
                 increaseX = 0;
                 dy = BookLevel.POS_ROW_TWO;
             }
 
-            books[i] = new BookLevel(src, BookLevel.POS_X + (dx * increaseX), dy, i);
+            books[i] = new BookLevel(src, BookLevel.POS_X + (dx * increaseX), dy, i, DataLevelsGame.listGameLevel.get(i).lock);
             increaseX++;
         }
     }
@@ -55,6 +57,12 @@ public class LevelMenuScreen extends Screens{
         for(int i = 0; i < 10; i++){
             game.batch.draw(books[i].getButton(), books[i].getX(), books[i].getY(), books[i].getWidth(), books[i].getHeight());
             books[i].paintNumber(game.batch);
+
+            // if Button isPressed and isUnLocked make a new Level
+            if((books[i].isPressed() && books[i].isUnlocked()) || (i == 0 && books[i].isPressed())){
+                //TODO: CREAR EL MUNDO DEL JUEGO
+                this.game.setScreen(new GameScreen(game, DataLevelsGame.listGameLevel.get(i).spawn_rate_words,  DataLevelsGame.listGameLevel.get(i).gravity));
+            }
         }
 
         game.batch.draw(btnBack.getButton(), btnBack.getX(), btnBack.getY(), btnBack.getWidth(), btnBack.getHeight());
@@ -62,8 +70,14 @@ public class LevelMenuScreen extends Screens{
         game.batch.end();
     }
 
-    @Override
-    public void update(float delta) {
 
+    @Override
+    public void update(float delta) {}
+
+    @Override
+    public void dispose() {
+        bg.dispose();
+        btnBack.dispose();
+        books = null;
     }
 }
