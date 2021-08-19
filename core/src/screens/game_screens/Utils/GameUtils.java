@@ -55,18 +55,22 @@ public class GameUtils {
                 listWords.add(data.get(i).toString());
 
             if (nLetters >= WORDS_OF_5_LETTERS_OR_LESS) {
+                data = new JsonReader().parse(Gdx.files.internal("wordsList.json")).get("equalsTo5");
                 for (int i = 0; i < data.size; i++)
                     listWords.add(data.get(i).toString());
 
                 if (nLetters >= WORDS_OF_6_LETTERS_OR_LESS) {
+                    data = new JsonReader().parse(Gdx.files.internal("wordsList.json")).get("equalsTo6");
                     for (int i = 0; i < data.size; i++)
                         listWords.add(data.get(i).toString());
 
                     if (nLetters >= WORDS_OF_7_LETTERS_OR_LESS) {
+                        data = new JsonReader().parse(Gdx.files.internal("wordsList.json")).get("equalsTo7");
                         for (int i = 0; i < data.size; i++)
                             listWords.add(data.get(i).toString());
 
                         if (nLetters >= WORDS_OF_15_LETTERS_OR_MORE) {
+                            data = new JsonReader().parse(Gdx.files.internal("wordsList.json")).get("moreThan7");
                             for (int i = 0; i < data.size; i++)
                                 listWords.add(data.get(i).toString());
                         }
